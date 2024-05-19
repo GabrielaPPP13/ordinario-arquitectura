@@ -1,14 +1,12 @@
 @extends('base')
 @section('title', 'Inicio')
+
+
+
 @section('body')
-<div class="grid">
-    <div style="height: 2rem;" class="col-12 d-flex justify-content-between">
-        <a href="{{ route('users.index') }}">Usuarios</a>
-        <a href="{{ route('education-levels.index') }}">Niveles educativos</a>
-        <a href="{{ route('cities.index') }}">Municipios</a>
-        <button class="btn btn-danger" onclick="logout()">Cerrar sesión</button>
-    </div>
-</div>
+@include('sidebar')
+
+
 @endsection
 
 @push('scripts')
@@ -27,3 +25,4 @@
         }
     </script>
 @endpush
+

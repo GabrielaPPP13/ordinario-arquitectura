@@ -54,4 +54,8 @@ class UserController extends Controller
     public function home() {
         return view('index');
     }
+
+    public function indexUser() {
+        return view('indexUser');
+    }
 }

@@ -39,7 +39,7 @@ class EducationLevelController extends Controller
     public function store(Request $request)
     {
         $educationLevel = EducationLevel::create($request->all());
-        return $educationLevel;
+        return response()->json($educationLevel);
     }
 
     /**
@@ -50,27 +50,22 @@ class EducationLevelController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(EducationLevel $educationLevel)
+    public function edit($id)
     {
-        //
+        $educationLevel = EducationLevel::find($id);
+        return view('educationLevels.edit', compact('educationLevel'));
+    }
+    
+    public function update(Request $request, int $educationLevel)
+    {
+        $educationLevel = EducationLevel::find($educationLevel);
+        $educationLevel->update($request->all());
+        return response()->json($educationLevel);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, EducationLevel $educationLevel)
+    public function destroy($educationLevel)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(EducationLevel $educationLevel)
-    {
-        //
+        EducationLevel::find($educationLevel)->delete();
+        return response()->json('Ok');
     }
 }

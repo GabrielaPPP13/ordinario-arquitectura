@@ -6,37 +6,37 @@
                     <h4 class="card-title text-center mb-4">Formulario de Registro</h4>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <input name="curp" class="form-control" placeholder="CURP" required/>
+                            <input name="curp" class="form-control" placeholder="CURP" value="{{ optional($ticket ?? null)->curp }}" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <input name="phone_1" type="number" class="form-control" placeholder="Teléfono 1" value="{{ optional($ticket ?? null)->phone_1 }}" />
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <input name="phone_2" type="number" class="form-control" placeholder="Teléfono 2" value="{{ optional($ticket ?? null)->phone_2 }}" />
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input name="phone_1" type="number" class="form-control" placeholder="Teléfono 1" required />
+                            <input name="name" class="form-control" placeholder="Nombre" value="{{ optional($ticket ?? null)->name }}" />
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input name="phone_2" type="number" class="form-control" placeholder="Teléfono 2"  required/>
+                            <input name="last_name" class="form-control" placeholder="Apellido paterno" value="{{ optional($ticket ?? null)->last_name }}" />
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input name="name" class="form-control" placeholder="Nombre" required />
+                            <input name="second_last_name" class="form-control" placeholder="Apellido materno" value="{{ optional($ticket ?? null)->second_last_name }}" />
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input name="last_name" class="form-control" placeholder="Apellido paterno" required />
+                            <input type="email" name="email" class="form-control" placeholder="Email" value="{{ optional($ticket ?? null)->email }}" /> 
                         </div>
                         <div class="col-md-6 mb-3">
-                            <input name="second_last_name" class="form-control" placeholder="Apellido materno"  required/>
+                            <input type="date" name="date" class="form-control" onchange="getAvailableTimes(event)" value="{{ optional($ticket ?? null)->date }}"/>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <input type="email" name="email" class="form-control" placeholder="Email" required /> 
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <input type="date" name="date" class="form-control" onchange="getAvailableTimes(event)" />
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <select name="time" id="availableHours" class="form-control" >
+                        {{-- <div class="col-md-6 mb-3">
+                            <select name="time" id="availableHours" class="form-control">
                                 <option>Elige un horario</option>
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="col-md-6 mb-3">
-                            <select name="city_id" id="citiesSelect" class="form-control">
-                                <option selected disabled>Elige una ciudad</option>
+                            <select name="city_id" id="citiesSelect" class="form-control" >
+                                <option  selected disabled >Elige una ciudad</option>
                             </select>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -60,25 +60,3 @@
         </div>
     </div>
 </div>
-
-<style>
-    body {
-        background-color: #f8f9fa;
-    }
-    .container {
-        max-width: 900px;
-    }
-    .card {
-        border: none;
-        border-radius: 10px;
-    }
-    .card-title {
-        font-weight: bold;
-    }
-    .form-control {
-        border-radius: 0.375rem;
-    }
-    .mb-3 {
-        margin-bottom: 15px;
-    }
-</style>

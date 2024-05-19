@@ -1,6 +1,10 @@
 @extends('base')
 @section('title', 'Inicia sesion')
 @section('body')
+<nav class="navbar">
+    <div class="navbar-brand"></div>
+    <a href="{{ route('ticket.ticketIndex') }}" class="btn btn-primary btn-lg" style="margin-right: 15px;">Inicio</a>
+</nav>
 <div class="grid">
     <div style="height: 100vh;" class="col-12 d-flex align-items-center justify-content-center">
         <div class="card w-25">
