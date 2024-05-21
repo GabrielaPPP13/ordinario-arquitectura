@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\status;
+use App\Models\Status;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class StatusController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if ($request->ajax()) {
+            $statuses = Status::all();
+            return DataTables::of($statuses)->make();
+        }
+        return view('statuses.index');
     }
 
     /**
@@ -20,7 +25,7 @@ class StatusController extends Controller
      */
     public function create()
     {
-        //
+        return view('statuses.create');
     }
 
     /**
@@ -28,13 +33,14 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $status = Status::create($request->all());
+        return response()->json($status);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(status $status)
+    public function show(Status $status)
     {
         //
     }
@@ -42,24 +48,28 @@ class StatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(status $status)
+    public function edit($id)
     {
-        //
+        $status = Status::find($id);
+        return view('statuses.edit', compact('status'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, status $status)
+    public function update(Request $request, int $status)
     {
-        //
+        $status = Status::find($status);
+        $status->update($request->all());
+        return response()->json($status);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(status $status)
+    public function destroy($status)
     {
-        //
+        Status::find($status)->delete();
+        return response()->json('Ok');
     }
 }

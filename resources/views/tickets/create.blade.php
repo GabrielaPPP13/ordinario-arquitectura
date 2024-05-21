@@ -5,7 +5,7 @@
 @section('body')
 <nav class="navbar">
     <div class="navbar-brand"></div>
-    <a href="{{ route('indexUser') }}" class="btn btn-primary btn-lg" style="margin-right: 15px;">Inicio</a>
+    <a href="{{ route('ticket.ticketIndex') }}" class="btn btn-primary btn-lg" style="margin-right: 15px;">Inicio</a>
 </nav>
 <form class="row" id="ticketForm" onsubmit="createTicket();">
     @include('tickets.partials.form')

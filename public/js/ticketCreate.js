@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fillEducationLevelsSelect();
 
 
-    
+
 });
 
 const fillCitiesSelect = async () => {
@@ -100,4 +100,21 @@ const searchTicket = async () => {
 
         showToast('Error', 'No se ha encontrado un ticket', 'error');
     }
+}
+
+const editTicket = async id => {
+    event.preventDefault();
+    const url = route('tickets.update', id);
+    const form = document.getElementById('ticketForm');
+    const formData = new FormData(form);
+    const init = setMethodHeaders('PUT', formData)
+    console.log(Object.fromEntries(formData));
+    const req = await fetch(url, init);
+    if (req.ok) {
+        $('.modal').modal('hide');
+        showToast('Exito', 'Se han guardado los cambios', 'success');
+        ticketsTable.ajax.reload();
+        return;
+    }
+    showToast('Error', 'Ha ocurrido un error', 'error');
 }

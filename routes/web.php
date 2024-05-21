@@ -7,6 +7,7 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ResponsableController;
 use App\Http\Controllers\EducationLevelController;
+use App\Http\Controllers\StatusController;
 
 Route::post('/login_user', [UserController::class, 'login'])->name('login_user');
 Route::get('/login', [UserController::class, 'index'])->name('login');
@@ -35,8 +36,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/users/delete/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     Route::post('/users/create', [UserController::class, 'store'])->name('users.store');
     Route::resource('/cities', CityController::class);
-    // Route::resource('/tickets', TicketController::class)->except('create', 'store', 'edit', 'update');
+    Route::resource('/tickets', TicketController::class)->except('create', 'store', 'edit', 'update');
     Route::resource('/subjects', SubjectController::class);
+    Route::resource('/responsables', ResponsableController::class);
+    Route::resource('/statuses', StatusController::class);
     Route::resource('/education-levels', EducationLevelController::class);
 
 });

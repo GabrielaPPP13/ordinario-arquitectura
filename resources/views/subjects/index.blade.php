@@ -1,5 +1,5 @@
 @extends('base')
-@section('title', 'Municipios')
+@section('title', 'Asuntos')
 @section('body')
 
 <div class="grid" style="margin: 20px;">
@@ -7,16 +7,16 @@
 
     <div class="col-9" style="margin-left: 220px;"> 
         <div class="col-12">
-            <h5>Municipios</h5>
+            <h5>Asuntos</h5>
         </div>
         <div class="col-12">
-            <button class="btn btn-primary" onclick="createCityModal()">Agregar</button>
+            <button class="btn btn-primary" onclick="createSubjectModal()">Agregar</button>
         </div>
         <div class="col-12">
-            <table class="table" id="citiesTable">
+            <table class="table" id="subjectsTable">
                 <thead>
                     <tr>
-                        <th>Municipio</th>
+                        <th>Asunto</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -29,6 +29,6 @@
 
 @endsection
 @push('scripts')
-<script src="{{ asset('js/cityIndex.js') }}" defer></script>
-<script src="{{ asset('js/cityCreateUpdate.js') }}" defer></script>
+<script src="{{ asset('js/subjectIndex.js') }}" defer></script>
+<script src="{{ asset('js/subjectCreateUpdate.js') }}" defer></script>
 @endpush

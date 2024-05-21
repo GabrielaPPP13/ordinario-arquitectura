@@ -13,11 +13,11 @@
     <form class="ticket-form">
         <div class="form-group">
             <label for="curp">CURP</label>
-            <input id="curp" class="form-control" name="curp" placeholder="CURP" />
+            <input id="curp" class="form-control" name="curp" placeholder="CURP" required />
         </div>
         <div class="form-group">
             <label for="ticket">Folio</label>
-            <input id="folio" name="ticket" class="form-control mt-2" placeholder="Folio del ticket" />
+            <input id="folio" name="ticket" class="form-control mt-2" placeholder="Folio del ticket" required />
         </div>
         <button type="submit" class="view-ticket-button" onclick="searchTicket()">Buscar Ticket</button>
         <a href="{{ route('tickets.create') }}" class="register-ticket-button">Registrar Ticket</a>
