@@ -58,4 +58,20 @@ class UserController extends Controller
     public function indexUser() {
         return view('indexUser');
     }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+        return view('users.edit', compact('user'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, int $user)
+    {
+        $user = User::find($user);
+        $user->update($request->all());
+        return response()->json($user);
+    }
 }

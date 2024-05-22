@@ -14,6 +14,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
 
+
 class TicketController extends Controller
 {
     /**
@@ -119,6 +120,19 @@ class TicketController extends Controller
         return view('tickets.edit', compact('ticket', 'cities', 'subjects', 'responsables', 'educationLevels', 'statuses'));
     }
 
+
+    public function editTicket($ticket)
+    {
+        $ticket = Ticket::find($ticket);
+        $cities = City::whereNull('deleted_at')->get();
+        $subjects = Subject::all();
+        $statuses = Status::all(); 
+        $responsables = Responsable::all();
+        $educationLevels = EducationLevel::whereNull('deleted_at')->get();
+        return view('tickets.editTicket', compact('ticket', 'cities', 'subjects', 'responsables', 'educationLevels', 'statuses'));
+    }
+
+
     /**
      * Update the specified resource in storage.
      */
@@ -146,4 +160,28 @@ class TicketController extends Controller
         $pdf->loadView('tickets.pdf', compact('ticket'));
         return $pdf->stream();
     }
+
+    public function ticketIndexGraficas()
+    {
+        // Obtener el recuento de tickets por estado con nombres de estado
+        $ticketStatusCount = Ticket::select('statuses.status')
+            ->selectRaw('COUNT(*) as total')
+            ->leftJoin('statuses', 'tickets.status_id', '=', 'statuses.id')
+            ->groupBy('statuses.status')
+            ->pluck('total', 'statuses.status')
+            ->toArray();
+    
+        // Obtener el recuento de tickets por municipio con nombres de municipio
+        $ticketCityCount = Ticket::select('cities.city')
+            ->selectRaw('COUNT(*) as total')
+            ->leftJoin('cities', 'tickets.city_id', '=', 'cities.id')
+            ->groupBy('cities.city')
+            ->pluck('total', 'cities.city')
+            ->toArray();
+    
+        return view('index', compact('ticketStatusCount', 'ticketCityCount'));
+    }
+    
+
+
 }

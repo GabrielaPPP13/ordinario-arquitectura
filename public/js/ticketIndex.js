@@ -51,11 +51,19 @@ const initTicketsTable = async () => {
                 data: 'subject.subject'
             },
             {
+                data: 'date',  // Agrega la columna de fecha
+                render: data => data ? new Date(data).toLocaleDateString() : ''
+            },
+            {
+                data: 'time',  // Agrega la columna de hora
+                render: data => data ? data.substr(0, 5) : ''
+            },
+            {
                 data: 'created_at'
             },
             {
                 data: 'id',
-                render: id =>
+                render: id => 
                 (
                     `<button onclick="deleteTicket(${id})" class="btn btn-danger">Borrar</button>
                     <button onclick="editTicketModal(${id})" class="btn btn-primary">Editar</button>`
@@ -109,3 +117,5 @@ const createTicketModal = async () => {
 
     showToast('Error', 'Ha ocurrido un error', 'error');
 }
+
+

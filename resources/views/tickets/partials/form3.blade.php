@@ -33,11 +33,13 @@
                             </div>
                             <div class="col-md-12 mb-3">
                                 <select name="status_id" id="statusesSelect" class="form-control">
-                                    <option value="" disabled selected>Elige un estatus</option>
                                     @foreach ($statuses as $status)
                                         <option value="{{ $status->id }}"
                                             @if(isset($ticket) && $ticket->status_id == $status->id)
                                                 selected
+                                            @endif
+                                            @if($status->id != 4)
+                                                disabled
                                             @endif
                                         >
                                             {{ $status->status }}
@@ -45,6 +47,8 @@
                                     @endforeach
                                 </select>
                             </div>
+                            
+                            
                             <div class="col-md-12 mb-3">
                                 <select name="city_id" id="citiesSelect" class="form-control">
                                     <option value="" disabled selected>Elige una ciudad</option>

@@ -36,7 +36,8 @@ const initUsersTable = async () => {
             },
             {
                 data: 'id',
-                render: d => `<button class="btn btn-danger" onclick="deleteUser(${d})">Borrar</button>`
+                render: id => `<button class="btn btn-danger" onclick="deleteUser(${id})">Borrar</button>
+                <button onclick="editUserModal(${id})" class="btn btn-primary">Editar</button>`
             }
         ]
     });
@@ -63,6 +64,21 @@ const deleteUser = async id => {
     if (req.ok) {
         showToast('Exito', 'Se ha eliminado con exito', 'success');
         usersTable.ajax.reload();
+        return;
+    }
+
+    showToast('Error', 'Ha ocurrido un error', 'error');
+}
+
+const editUserModal = async id => {
+    const url = route('users.edit', id);
+    const req = await fetch(url);
+    if (req.ok) {
+        const view = await req.text();
+        userModal = new bootstrap.Modal(document.getElementById('modal'));
+        document.getElementById('modalTitle').innerHTML = 'Editar municipio';
+        document.getElementById('modalBody').innerHTML = view;
+        userModal.toggle();
         return;
     }
 

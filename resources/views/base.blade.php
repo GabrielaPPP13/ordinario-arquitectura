@@ -21,6 +21,8 @@
     <script defer src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
     <script defer src="{{ asset('js/libs/toast/jquery.toast.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>

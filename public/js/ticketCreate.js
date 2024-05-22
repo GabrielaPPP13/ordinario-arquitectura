@@ -83,6 +83,7 @@ const createTicket = async () => {
         window.open(route('tickets.getPDF', res.id), '_blank').focus();
         return;
     }
+    alert('CURP incorrecta')
     showToast('Error', 'Ha ocurrido un error', 'error');
 }
 
@@ -95,7 +96,7 @@ const searchTicket = async () => {
     if (req.ok) {
         const res = await req.json();
         if (!!res) {
-            window.open(route('tickets.edit', res.id));
+            window.open(route('tickets.editTicket', res.id));
         }
 
         showToast('Error', 'No se ha encontrado un ticket', 'error');
@@ -103,12 +104,13 @@ const searchTicket = async () => {
 }
 
 const editTicket = async id => {
-    event.preventDefault();
-    const url = route('tickets.update', id);
+    console.log('editTicket called with id:', id);
+    // alert('hola');
     const form = document.getElementById('ticketForm');
     const formData = new FormData(form);
-    const init = setMethodHeaders('PUT', formData)
-    console.log(Object.fromEntries(formData));
+    const init = setMethodHeaders('PUT', formData);
+    console.log('Form data:', Object.fromEntries(formData));
+    const url = route('tickets.update', id);
     const req = await fetch(url, init);
     if (req.ok) {
         $('.modal').modal('hide');
@@ -116,5 +118,14 @@ const editTicket = async id => {
         ticketsTable.ajax.reload();
         return;
     }
+    
     showToast('Error', 'Ha ocurrido un error', 'error');
+};
+
+const alertaprueba = () => {
+    alert('Esta es una alerta de prueba');
 }
+
+const openTicketModal = () => {
+    $('#ticketModal').modal('show');
+};

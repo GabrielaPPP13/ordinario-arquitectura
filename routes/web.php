@@ -8,6 +8,11 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ResponsableController;
 use App\Http\Controllers\EducationLevelController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\ChartController;
+
+
+Route::get('/bar-chart', [ChartController::class, 'barChart']);
+
 
 Route::post('/login_user', [UserController::class, 'login'])->name('login_user');
 Route::get('/login', [UserController::class, 'index'])->name('login');
@@ -25,11 +30,18 @@ Route::get('/tickets/create', [TicketController::class, 'create'])->name('ticket
 Route::get('/tickets/{ticket}/edit', [TicketController::class, 'edit'])->name('tickets.edit');
 Route::get('/tickets/search-by-curp/{curp}/{folio}', [TicketController::class, 'searchTicket'])->name('tickets.search');
 Route::get('/', [TicketController::class, 'ticketIndex'])->name('ticket.ticketIndex');
+// Route::put('/tickets/{ticket}', [TicketController::class, 'update'])->name('tickets.update');
 
+
+Route::get('/tickets/{ticket}/editTicket', [TicketController::class, 'editTicket'])->name('tickets.editTicket');
+Route::resource('/tickets', TicketController::class);
+
+Route::put('/tickets/{ticket}', [TicketController::class, 'update'])->name('tickets.update');
 
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('/admin', [UserController::class, 'home'])->name('home');
+    // Route::get('/admin', [UserController::class, 'home'])->name('home');
+    Route::get('/admin', [TicketController::class, 'ticketIndexGraficas'])->name('home');
     Route::get('/logout', [UserController::class, 'logout'])->name('users.logout');
     Route::get('/users', [UserController::class, 'indexUsers'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
@@ -41,5 +53,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/responsables', ResponsableController::class);
     Route::resource('/statuses', StatusController::class);
     Route::resource('/education-levels', EducationLevelController::class);
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+
 
 });
